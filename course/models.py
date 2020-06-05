@@ -10,11 +10,11 @@ class Course(models.Model):
         return self.course_name
 
 class Subject(models.Model):
-    subject_name = models.CharField(verbose_name="Subject Name",max_length=100)
+    subject_name = models.CharField(verbose_name="Subject Name",max_length=200)
     image = models.ImageField(null=True,blank=True,upload_to='subject/')
-    subject_number = models.CharField(verbose_name="Subject code",max_length=10)
-    credit_hours = models.CharField(verbose_name='Credit Hours',default=3,max_length=3)
-    nature = models.CharField(verbose_name="Subject Nature",max_length=50,choices=nature)
+    subject_number = models.CharField(verbose_name="Subject code",max_length=20)
+    credit_hours = models.CharField(verbose_name='Credit Hours',default=3,max_length=10)
+    nature = models.CharField(verbose_name="Subject Nature",max_length=100,choices=nature)
     description = models.TextField(verbose_name="Short Description")
     syllabus = models.URLField(verbose_name="Google Drive link of Syllabus PDF")
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
@@ -29,8 +29,8 @@ class Subject(models.Model):
         return self.subject_name
 
 class OldQuestion(models.Model):
-    title = models.CharField(verbose_name="Title",max_length=50)
-    year = models.CharField(verbose_name='Year',blank=True,null=True,max_length=100)
+    title = models.CharField(verbose_name="Title",max_length=200)
+    year = models.CharField(verbose_name='Year',blank=True,null=True,max_length=200)
     link = models.URLField(verbose_name="Link of PDF/ Docs")
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
 
@@ -38,7 +38,7 @@ class OldQuestion(models.Model):
         return self.title
 
 class Notes(models.Model):
-    title = models.CharField(verbose_name="Title",max_length=50)
+    title = models.CharField(verbose_name="Title",max_length=200)
     link = models.URLField(verbose_name="Link of PDF/ Docs")
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
 
@@ -46,7 +46,7 @@ class Notes(models.Model):
         return self.title
 
 class Book(models.Model):
-    title = models.CharField(verbose_name="Title",max_length=50)
+    title = models.CharField(verbose_name="Title",max_length=200)
     link = models.URLField(verbose_name="Link of PDF/ Docs")
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
 
@@ -55,7 +55,7 @@ class Book(models.Model):
 
 
 class LabManual(models.Model):
-    title = models.CharField(verbose_name="Title",max_length=10)
+    title = models.CharField(verbose_name="Title",max_length=200)
     link = models.URLField(verbose_name="Link of PDF/ Docs")
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
 
@@ -63,7 +63,7 @@ class LabManual(models.Model):
         return self.title
 
 class PractiseQuestion(models.Model):
-    title = models.CharField(verbose_name="Title",max_length=50)
+    title = models.CharField(verbose_name="Title",max_length=200)
     link = models.URLField(verbose_name="Link of PDF/ Docs")
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
 

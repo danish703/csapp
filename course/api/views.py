@@ -41,6 +41,20 @@ def getSubjects(request):
 @api_view(['GET',])
 def getOldQuestion(request):
     subject_id = request.GET.get('subject')
+    course = request.GET.get('course')
+    sem = request.GET.get('sem')
+    if course != None and sem != None:
+        id = Course.objects.get(course_name__iexact=course.rstrip()).id
+        subject = Subject.objects.filter(course_id=id, semester=sem)
+        oldQuestion = OldQuestion.objects.filter(subject__in=subject)
+        serializer = OldQuestionSerializer(oldQuestion, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    if course != None:
+        id = Course.objects.get(course_name__iexact=course.rstrip()).id
+        subject = Subject.objects.filter(course_id=id)
+        oldQuestion = OldQuestion.objects.filter(subject__in=subject)
+        serializer = OldQuestionSerializer(oldQuestion, many=True)
+        return JsonResponse(serializer.data, safe=False)
     oldQuestion = OldQuestion.objects.all()
     if subject_id !=None:
         oldQuestion = OldQuestion.objects.filter(subject_id=subject_id)
@@ -50,6 +64,20 @@ def getOldQuestion(request):
 @api_view(['GET',])
 def getNotes(request):
     subject_id = request.GET.get('subject')
+    course = request.GET.get('course')
+    sem = request.GET.get('sem')
+    if course!=None and sem!=None:
+        id = Course.objects.get(course_name__iexact=course.rstrip()).id
+        subject = Subject.objects.filter(course_id=id,semester=sem)
+        notes = Notes.objects.filter(subject__in=subject)
+        serializer = NotesSerializer(notes, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    if course!=None:
+        id = Course.objects.get(course_name__iexact=course.rstrip()).id
+        subject = Subject.objects.filter(course_id=id)
+        notes = Notes.objects.filter(subject__in=subject)
+        serializer = NotesSerializer(notes, many=True)
+        return JsonResponse(serializer.data, safe=False)
     notes = Notes.objects.all()
     if subject_id !=None:
         notes = Notes.objects.filter(subject_id=subject_id)
@@ -59,6 +87,20 @@ def getNotes(request):
 @api_view(['GET',])
 def getBooks(request):
     subject_id = request.GET.get('subject')
+    course = request.GET.get('course')
+    sem = request.GET.get('sem')
+    if course!=None and sem!=None:
+        id = Course.objects.get(course_name__iexact=course.rstrip()).id
+        subject = Subject.objects.filter(course_id=id,semester=sem)
+        books = Book.objects.filter(subject__in=subject)
+        serializer = BookSerializer(books, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    if course!=None:
+        id = Course.objects.get(course_name__iexact=course.rstrip()).id
+        subject = Subject.objects.filter(course_id=id)
+        books = Book.objects.filter(subject__in=subject)
+        serializer = BookSerializer(books, many=True)
+        return JsonResponse(serializer.data, safe=False)
     books = Book.objects.all()
     if subject_id !=None:
         books = Book.objects.filter(subject_id=subject_id)
@@ -68,6 +110,20 @@ def getBooks(request):
 @api_view(['GET',])
 def getLabManual(request):
     subject_id = request.GET.get('subject')
+    course = request.GET.get('course')
+    sem = request.GET.get('sem')
+    if course!=None and sem!=None:
+        id = Course.objects.get(course_name__iexact=course.rstrip()).id
+        subject = Subject.objects.filter(course_id=id,semester=sem)
+        lm = LabManual.objects.filter(subject__in=subject)
+        serializer = LabManualSerializer(lm, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    if course!=None:
+        id = Course.objects.get(course_name__iexact=course.rstrip()).id
+        subject = Subject.objects.filter(course_id=id)
+        lm = LabManual.objects.filter(subject__in=subject)
+        serializer = LabManualSerializer(lm, many=True)
+        return JsonResponse(serializer.data, safe=False)
     lm = LabManual.objects.all()
     if subject_id !=None:
         lm = LabManual.objects.filter(subject_id=subject_id)
@@ -77,6 +133,20 @@ def getLabManual(request):
 @api_view(['GET',])
 def getPractiseQuestion(request):
     subject_id = request.GET.get('subject')
+    course = request.GET.get('course')
+    sem = request.GET.get('sem')
+    if course!=None and sem!=None:
+        id = Course.objects.get(course_name__iexact=course.rstrip()).id
+        subject = Subject.objects.filter(course_id=id,semester=sem)
+        pq = PractiseQuestion.objects.filter(subject__in=subject)
+        serializer = PractisQuestionSerializer(pq, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    if course!=None:
+        id = Course.objects.get(course_name__iexact=course.rstrip()).id
+        subject = Subject.objects.filter(course_id=id)
+        pq = PractiseQuestion.objects.filter(subject__in=subject)
+        serializer = PractisQuestionSerializer(pq, many=True)
+        return JsonResponse(serializer.data, safe=False)
     pq = PractiseQuestion.objects.all()
     if subject_id !=None:
         pq = PractiseQuestion.objects.filter(subject_id=subject_id)
